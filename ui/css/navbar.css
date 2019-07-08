@@ -1,0 +1,20 @@
+#navbar {
+    background: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: block;
+    transition: top 0.8s;
+    z-index: 10;
+    height: 62px;
+}
+
+#navbar a {
+    float: right;
+    display: block;
+    color: #000;
+    font-weight: 500;
+    text-decoration: none;
+    margin: 2em 3em;
+    font-size: 12px;
+}

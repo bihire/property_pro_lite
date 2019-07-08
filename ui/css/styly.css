@@ -1,0 +1,39 @@
+.input-itm label {
+    font-size: 0.9em;
+}
+
+.input-itm {
+    margin: 30px 5px;
+}
+
+.prime-inpt {
+    display: flex;
+    flex-direction: row;
+    padding: 0 5px;
+    margin: 5px 0;
+}
+
+.prime-inpt input {
+    background-color: rgb(235, 225, 225);
+    border-width: 0;
+    border-style: groove;
+    border-color: gray;
+    font-size: 16px;
+    padding: 4px;
+    flex: 1;
+}
+
+.notyou input {
+    background-color: #fff;
+}
+
+.submit .submit_button {
+    padding: 10px 40px;
+    color: black;
+    border-width: 0;
+    border-style: groove;
+    border-color: yellow;
+    background: yellow;
+    float: right;
+    margin: 20px
+}
