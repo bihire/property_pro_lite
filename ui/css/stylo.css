@@ -1,0 +1,222 @@
+
+@media only screen and (min-width: 480px){
+  body {
+    padding:0;
+    margin:0;
+    font-family: 'Work Sans', sans-Serif;
+    
+    border-left: 50px solid rgb(238, 220, 220);
+    border-right: 50px solid rgb(238, 220, 220);
+    
+  }
+      
+  /*navigation menus*/
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color:black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-weight:1000;
+  }
+  
+  li a:hover:not(.active) {
+    background-color:whitesmoke;
+  }
+  
+  .active {
+    background-color:orange;
+  }
+  /*what happens when we click on navigation menus*/
+  nav>ul>li>a:hover {
+      background-color:whitesmoke;
+      color:orange;
+      text-decoration:underline;
+  }
+  /*words over background image*/
+  .backgroundd {
+      position: relative;
+      text-align: center;
+      color: white;
+      background: url(../images/img1.jpg) no-repeat center center;
+      padding:150px;
+     
+  }
+  /* Centering text over background image */
+  .centered{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color:silver;
+  }
+  #properties{
+    color:orange;
+    text-align:center;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+
+  .sidenav {
+    height: 50%;
+    width: 160px;
+    position: absolute;
+    background-color: #111;
+    overflow-x: hidden;
+    margin-bottom:40%;
+  }
+/* customize the label(container) */
+.container{
+  display:block;
+  position:relative;
+padding-left:35px;
+margin-bottom:12px;
+cursor:pointer;
+font-size:22px;
+color:whitesmoke;
+
+}
+/* hide default checkbox */
+.container input{
+position:absolute;
+opacity:0;
+cursor:poiner;
+height:0;
+width:0;
+padding-left:35px;
+}
+  /* create a new checkbox */
+
+.checkmark{
+  position:absolute;
+  top:0;
+  left:0;
+  height:25px;
+  width:25px;
+  background-color:#eee;
+  margin-left:5px;
+}
+/* On mouse-over, add an orange background color */
+.container:hover input ~ .checkmark {
+  background-color: orange;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+  .main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+   
+  }
+  
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+/* all properties in flex */
+  #containerp{
+left:20%;  
+ display: flex;
+ background-color:#fcfcfc;
+ justify-content:center;
+ 
+}
+  #containerp>div
+  {
+    
+ background-color:white;
+
+ 
+ text-align:center;
+ margin: 5px;
+ padding: 10px;
+ 
+ 
+}
+#containerp  img{
+height:200px;
+width:300px;
+}
+
+#house{
+  left:20%;  
+   display: flex;
+   background-color:#fcfcfc;
+   justify-content:center;
+   
+  }
+    #house>div
+    {
+      
+   background-color:white;
+   text-align:center;
+   margin: 5px;
+   padding: 10px;
+   
+   
+  }
+/* resize imge of properties */
+#house  img{
+height:200px;
+width:300px;
+}
+/* caption on image */
+#who:hover{
+ background-color:silver;
+ color:orange;
+}
+
+
+   /*footer*/   
+      
+  .footer {
+     position:relative;
+      
+      bottom: 0;
+      width: 93,5%;
+      background-color:#b8bdc4 ;
+      text-align: center;
+      height:40px;
+      padding:40px;
+  }
+}
