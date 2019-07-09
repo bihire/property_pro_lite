@@ -36,11 +36,12 @@ body {
   font-size: 16px;
   font-family: sans-serif;
   background-color: #fff;
-  margin: 67px 15%;
+  margin: 5px 15%;
 }
 
 .prime .container {
   display: flex;
+  flex-flow: row-reverse;
   width: 100%;
 }
 

@@ -5,11 +5,6 @@ body {
   background-color: rgb(75, 64, 172);
 }
 
-a {
-  text-decoration: none;
-  background-color: black;
-}
-
 .prime {
   display: flex;
   padding: 5% 15%;
