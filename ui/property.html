@@ -12,81 +12,95 @@
 </head>
 
 <body>
-  <div id="navbar">
-    <div id="navbar">
-      <a href="./login.html">Login</a>
-      <a href="./signup.html">Register</a>
+  <nav class="navbar">
+    <span class="navbar-toggle" id="js-navbar-toggle">
+      <i class="fas fa-bars"></i>
+    </span>
+    <a href="#" class="logo">logo</a>
+    <ul class="main-nav" id="js-menu">
+      <li>
+        <a href="#" class="nav-links">Home</a>
+      </li>
+      <li>
+        <a href="#" class="nav-links">Products</a>
+      </li>
+      <li>
+        <a href="#" class="nav-links">About Us</a>
+      </li>
+      <li>
+        <a href="#" class="nav-links">Contact Us</a>
+      </li>
+      <li>
+        <a href="#" class="nav-links">Blog</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="prime">
+    <div class="container">
 
-      <a href="#">contact</a>
-      <a href="#">About</a>
-      <a href="./index.html">Home</a>
-    </div>
-    <div class="prime">
-      <div class="container">
-
-        <p id="title"> House to let at Kicukiro</p>
-        <div class="property">
-          <!-- image of property -->
-          <div class="property-image">
-            <img src="images/img1.jpg" alt="image" width="100%" alt="image" />
-          </div>
-          <!-- information about property -->
-          <div class="property-desc">
-
-            <p>3 bedrooms</p>
-            <p>1 bathroom</p>
-            <p>locate at Gikondo</p>
-            <p>price:300$/monthly</p>
-          </div>
-
+      <p id="title"> House to let at Kicukiro</p>
+      <div class="property">
+        <!-- image of property -->
+        <div class="property-image">
+          <img src="images/img1.jpg" alt="image" width="100%" alt="image" />
         </div>
-        <!-- google map -->
-        <div class="property-location">
-          <p>Google map</p>
-          <div id="map">
-          </div>
+        <!-- information about property -->
+        <div class="property-desc">
+
+          <p>3 bedrooms</p>
+          <p>1 bathroom</p>
+          <p>locate at Gikondo</p>
+          <p>price:300$/monthly</p>
         </div>
 
-        <!-- description about property -->
-        <div class="property-description-full">
-          <h3 class="title">Description:</h3>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum</p>
-        </div>
-        <div class="footer">
-          <p>copyright &COPY; Bihire Jules Boris,All right Reserved</p>
-
+      </div>
+      <!-- google map -->
+      <div class="property-location">
+        <p>Google map</p>
+        <div id="map">
         </div>
       </div>
 
-      <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj5L9xd4E8E2tWXEYpwwTtmC_3dxCnxrk&callback=initMap">
-      </script>
-      <script>
-        // Initialize and add the map
-        function initMap() {
-          // The location of Uluru
-          var uluru = {
-            lat: -25.344,
-            lng: 131.036
-          };
-          // The map, centered at Uluru
-          var map = new google.maps.Map(
-            document.getElementById('map'), {
-              zoom: 4,
-              center: uluru
-            });
-          // The marker, positioned at Uluru
-          var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
+      <!-- description about property -->
+      <div class="property-description-full">
+        <h3 class="title">Description:</h3>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+          electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+          Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+          PageMaker including versions of Lorem Ipsum</p>
+      </div>
+      <div class="footer">
+        <p>copyright &COPY; Bihire Jules Boris,All right Reserved</p>
+
+      </div>
+    </div>
+
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj5L9xd4E8E2tWXEYpwwTtmC_3dxCnxrk&callback=initMap">
+    </script>
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of Uluru
+        var uluru = {
+          lat: -25.344,
+          lng: 131.036
+        };
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+          document.getElementById('map'), {
+            zoom: 4,
+            center: uluru
           });
-        }
-      </script>
+        // The marker, positioned at Uluru
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
 </body>
 
 </html>
