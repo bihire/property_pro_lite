@@ -192,30 +192,30 @@ module.exports = {
       });
     }
   },
-  // async delete(req, res) {
-  //   try {
-  //     const { id } = req.params;
-  //     const validId = properties.find(property => property.id == id);
+  async delete(req, res) {
+    try {
+      const { id, owner } = req.body
+      const validId = properties.find(property => property.owner == owner && property.id == id);
 
-  //     if (validId == undefined) {
-  //       throw res.status(404).send({
-  //         status: 'error',
-  //         error: "the property doesn't exist"
-  //       });
-  //     }
-  //     const del = properties.splice(validId);
-  //     res.status(200).send({
-  //       status: 'success',
-  //       data: {
-  //         message: `${del.length} items successfully deleted`
-  //       }
-  //     });
-  //   }
-  //   catch (error) {
-  //     res.status(500).send({
-  //       status: 'error',
-  //       error: `Error fetching property:   ${error}`
-  //     });
-  //   }
-  // }
+      if (validId == undefined) {
+        throw res.status(404).send({
+          status: 'error',
+          error: "sorry we can't serve you"
+        });
+      }
+      const del = properties.splice(validId);
+      res.status(200).send({
+        status: 'success',
+        data: {
+          message: `${del.length} items successfully deleted`
+        }
+      });
+    }
+    catch (error) {
+      res.status(403).send({
+        status: 'error',
+        error: `Error fetching property:   ${error}`
+      });
+    }
+  }
 };
