@@ -9,29 +9,32 @@
   <link rel="stylesheet" type="text/css" href="css/property.css">
   <link rel="stylesheet" type="text/css" href="css/navbar.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="css/fontawesome.min.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
   <nav class="navbar">
     <span class="navbar-toggle" id="js-navbar-toggle">
-      <i class="fas fa-bars"></i>
+      <i class="fa fa-bars"></i>
     </span>
-    <a href="#" class="logo">logo</a>
+    <a href="../index.html" class="logo">logo</a>
     <ul class="main-nav" id="js-menu">
       <li>
-        <a href="#" class="nav-links">Home</a>
+        <a href="../index.html" class="nav-links">Home</a>
       </li>
       <li>
-        <a href="#" class="nav-links">Products</a>
+        <a href="../index.html" class="nav-links">Properties</a>
       </li>
       <li>
-        <a href="#" class="nav-links">About Us</a>
+        <a href="./signup.html" class="nav-links">Register</a>
       </li>
       <li>
-        <a href="#" class="nav-links">Contact Us</a>
+        <a href="./login.html" class="nav-links">Login</a>
       </li>
       <li>
-        <a href="#" class="nav-links">Blog</a>
+        <a href="../index.html" class="nav-links">Logout</a>
       </li>
     </ul>
   </nav>
@@ -54,6 +57,17 @@
         </div>
 
       </div>
+      <div class="opt-btns">
+        <a href="#"><button class="sold"><i class="fas fa-check"> Onsale</i></button></a>
+        <a href="./edit-property.html"> <button class="edit"><i class="fas fa-pencil-alt"> Edit</i></button></a>
+        <a href="#"><button class="delete"><i class="fas fa-trash"> Delete</i></button></a>
+
+      </div>
+      <div class="opt-btns">
+
+        <a href="#"><button class="delete"><i class="fas fa-trash"> Delete</i></button></a>
+        <a href="#"><button class="delete"><i class="fas fa-add"></i></button></a>
+      </div>
       <!-- google map -->
       <div class="property-location">
         <p>Google map</p>
@@ -61,6 +75,16 @@
         </div>
       </div>
 
+      <!--- flag this property-->
+      <div class="flag">
+        <div class="accordion">
+          <p>Any complains about this Property please let us know</p><button class="flag-btn">Section 1</button>
+        </div>
+        <div class="panel">
+          <input type="text" placeholder="Title">
+          <textarea placeholder="Try to be scpecific..."></textarea
+        </div>
+      </div>
       <!-- description about property -->
       <div class="property-description-full">
         <h3 class="title">Description:</h3>
@@ -76,7 +100,7 @@
 
       </div>
     </div>
-
+    <script src="./js/flag.js"></script>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj5L9xd4E8E2tWXEYpwwTtmC_3dxCnxrk&callback=initMap">
     </script>

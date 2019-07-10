@@ -18,14 +18,29 @@
 </head>
 
 <body>
-  <div id="navbar">
-    <a href="./login.html">Login</a>
-    <a href="./signup.html">Register</a>
-
-    <a href="#">contact</a>
-    <a href="#">About</a>
-    <a href="./index.html">Home</a>
-  </div>
+  <nav class="navbar">
+    <span class="navbar-toggle" id="js-navbar-toggle">
+      <i class="fa fa-bars"></i>
+    </span>
+    <a href="../index.html" class="logo">logo</a>
+    <ul class="main-nav" id="js-menu">
+      <li>
+        <a href="../index.html" class="nav-links">Home</a>
+      </li>
+      <li>
+        <a href="../index.html" class="nav-links">Properties</a>
+      </li>
+      <li>
+        <a href="./signup.html" class="nav-links">Register</a>
+      </li>
+      <li>
+        <a href="./login.html" class="nav-links">Login</a>
+      </li>
+      <li>
+        <a href="../index.html" class="nav-links">Logout</a>
+      </li>
+    </ul>
+  </nav>
 
   <!-- info part -->
   <div class="prime">
@@ -117,7 +132,7 @@
                 <label> Upload an image:</label>
                 <div class="prime-inpt">
 
-                  <input type="file" class="number_input_2" autofocus />
+                  <input type="file" multiple autofocus />
 
                 </div>
               </div>
