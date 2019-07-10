@@ -111,30 +111,30 @@ module.exports = {
       });
     }
   },
-  // async get(req, res) {
-  //   try {
-  //     const { id } = req.params;
+  async get(req, res) {
+    try {
+      const { id } = req.params;
 
-  //     const validId = properties.find(property => property.id == id);
+      const validId = properties.find(property => property.id == id);
 
-  //     if (validId == undefined) {
-  //       throw res.status(404).send({
-  //         status: 'error',
-  //         error: "the property doesn't exist"
-  //       });
-  //     }
-  //     res.status(200).send({
-  //       status: 'success',
-  //       data: validId
-  //     });
-  //   }
-  //   catch (error) {
-  //     res.status(500).send({
-  //       status: 'error',
-  //       error: `Error fetching property:   ${error}`
-  //     });
-  //   }
-  // },
+      if (validId == undefined) {
+        throw res.status(404).send({
+          status: 'error',
+          error: "the property doesn't exist"
+        });
+      }
+      res.status(200).send({
+        status: 'success',
+        data: validId
+      });
+    }
+    catch (error) {
+      res.status(500).send({
+        status: 'error',
+        error: `Error fetching property:   ${error}`
+      });
+    }
+  },
   // async get_by_user(req, res) {
   //   try {
   //     const { user_id } = req.params;
