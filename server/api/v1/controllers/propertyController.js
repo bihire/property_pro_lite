@@ -111,54 +111,54 @@ module.exports = {
       });
     }
   },
-  // async get(req, res) {
-  //   try {
-  //     const { id } = req.params;
+  async get(req, res) {
+    try {
+      const { id } = req.params;
 
-  //     const validId = properties.find(property => property.id == id);
+      const validId = properties.find(property => property.id == id);
 
-  //     if (validId == undefined) {
-  //       throw res.status(404).send({
-  //         status: 'error',
-  //         error: "the property doesn't exist"
-  //       });
-  //     }
-  //     res.status(200).send({
-  //       status: 'success',
-  //       data: validId
-  //     });
-  //   }
-  //   catch (error) {
-  //     res.status(500).send({
-  //       status: 'error',
-  //       error: `Error fetching property:   ${error}`
-  //     });
-  //   }
-  // },
-  // async get_by_user(req, res) {
-  //   try {
-  //     const { user_id } = req.params;
+      if (validId == undefined) {
+        throw res.status(404).send({
+          status: 'error',
+          error: "the property doesn't exist"
+        });
+      }
+      res.status(200).send({
+        status: 'success',
+        data: validId
+      });
+    }
+    catch (error) {
+      res.status(500).send({
+        status: 'error',
+        error: `Error fetching property:   ${error}`
+      });
+    }
+  },
+  async get_by_user(req, res) {
+    try {
+      const { user_id } = req.params;
 
-  //     const validUserId = properties.filter(property => property.owner == user_id);
+      const validUserId = properties.filter(property => property.owner == user_id);
 
-  //     if (validUserId == undefined) {
-  //       throw res.status(404).send({
-  //         status: 'error',
-  //         error: "the user doesn't exist"
-  //       });
-  //     }
-  //     res.status(200).send({
-  //       status: 'success',
-  //       data: validUserId
-  //     });
-  //   }
-  //   catch (error) {
-  //     res.status(500).send({
-  //       status: 'error',
-  //       error: `Error fetching property:   ${error}`
-  //     });
-  //   }
-  // },
+      if (validUserId == undefined) {
+        throw res.status(404).send({
+          status: 'error',
+          error: "the user doesn't exist"
+        });
+      }
+      res.status(200).send({
+        status: 'success',
+        data: validUserId
+      });
+    }
+    catch (error) {
+      res.status(500).send({
+        status: 'error',
+        error: `Error fetching property:   ${error}`
+      });
+    }
+  },
   // async update(req, res) {
   //   try {
   //     const {
