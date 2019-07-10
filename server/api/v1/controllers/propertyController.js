@@ -80,37 +80,37 @@ module.exports = {
       });
     }
   },
-  // async get_all(req, res) {
-  //   try {
-  //     let propertis = null;
-  //     const { search } = req.query;
-  //     if (search) {
-  //       function filterByValue(properties, search) {
-  //         propertis = properties.filter((v, i) => {
-  //           if (v.type.toLowerCase().indexOf(search) >= 0) {
-  //             return true;
-  //           }
-  //           false;
-  //         });
-  //       }
-  //       filterByValue(properties, search);
+  async get_all(req, res) {
+    try {
+      let propertis = null;
+      const { search } = req.query;
+      if (search) {
+        function filterByValue(properties, search) {
+          propertis = properties.filter((v, i) => {
+            if (v.type.toLowerCase().indexOf(search) >= 0) {
+              return true;
+            }
+            false;
+          });
+        }
+        filterByValue(properties, search);
 
-  //       res.send(propertis);
-  //     }
-  //     else {
-  //       res.status(200).send({
-  //         status: 'success',
-  //         data: properties
-  //       });
-  //     }
-  //   }
-  //   catch (error) {
-  //     res.status(500).send({
-  //       status: 'error',
-  //       error: `Error fetching property:   ${error}`
-  //     });
-  //   }
-  // },
+        res.send(propertis);
+      }
+      else {
+        res.status(200).send({
+          status: 'success',
+          data: properties
+        });
+      }
+    }
+    catch (error) {
+      res.status(500).send({
+        status: 'error',
+        error: `Error fetching property:   ${error}`
+      });
+    }
+  },
   // async get(req, res) {
   //   try {
   //     const { id } = req.params;
