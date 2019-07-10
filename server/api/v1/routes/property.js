@@ -8,6 +8,6 @@ router.post('/property/update', PropertyController.update);
 router.get('/property/:id', PropertyController.get);
 router.get('/property', PropertyController.get_all);
 router.get('/property/user/:user_id', PropertyController.get_by_user);
-router.delete('/property/:id', PropertyController.delete);
+router.delete('/property/del', PropertyController.delete);
 
 module.exports = router;
