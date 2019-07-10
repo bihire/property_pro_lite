@@ -68,40 +68,40 @@ module.exports = {
       });
     }
   },
-  // async login(req, res) {
-  //   try {
-  //     const {
-  //       email,
-  //       password
-  //     } = req.body;
-  //     const User = users.find(user => user.email === email);
-  //     if (!User) {
-  //       throw res.status(401).json({
-  //         message: 'Wrong email or password combination.'
-  //       });
-  //     }
-  //     console.log(typeof User);
+  async login(req, res) {
+    try {
+      const {
+        email,
+        password
+      } = req.body;
+      const User = users.find(user => user.email === email);
+      if (!User) {
+        throw res.status(401).json({
+          message: 'Wrong email or password combination.'
+        });
+      }
+      console.log(typeof User);
 
-  //     const UserValid = User.password === password;
-  //     if (UserValid === false) {
-  //       throw res.status(401).json({
-  //         message: 'Wrong email or password combination.'
-  //       });
-  //     }
-  //     console.log(UserValid);
-  //     const token = jwt.sign(User, app.get('appSecret'));
-  //     console.log(token);
-  //     res.status(200).json({
-  //       status: 'success',
-  //       data: token
-  //     });
-  //   } catch (error) {
-  //     res.status(403).send({
-  //       status: 'error',
-  //       error: `invalid email or password:   ${error}`
-  //     });
-  //   }
-  // },
+      const UserValid = User.password === password;
+      if (UserValid === false) {
+        throw res.status(401).json({
+          message: 'Wrong email or password combination.'
+        });
+      }
+      console.log(UserValid);
+      const token = jwt.sign(User, app.get('appSecret'));
+      console.log(token);
+      res.status(200).json({
+        status: 'success',
+        data: token
+      });
+    } catch (error) {
+      res.status(403).send({
+        status: 'error',
+        error: `invalid email or password:   ${error}`
+      });
+    }
+  },
   // async update(req, res) {
   //   try {
   //     const user = [];
