@@ -159,38 +159,39 @@ module.exports = {
       });
     }
   },
-  // async update(req, res) {
-  //   try {
-  //     const {
-  //       address, status, price, state, city, type, ownerEmail, ownerPhoneNumber
-  //     } = req.body;
+  async update(req, res) {
+    try {
+      const {
+        address, status, price, state, city, type, ownerEmail, ownerPhoneNumber, owner, id
+      } = req.body;
 
-  //     const search = _.chain(properties)
-  //       .find({
-  //         id: 1
-  //       })
-  //       .merge({
-  //         address,
-  //         status,
-  //         price,
-  //         state,
-  //         city,
-  //         type,
-  //         ownerEmail,
-  //         ownerPhoneNumber
-  //       });
-  //     res.status(200).send({
-  //       status: 'success',
-  //       data: search,
-  //       dataProperty: properties
-  //     });
-  //   }
-  //   catch (error) {
-  //     await res.status(500).send({
-  //       message: `error: ${error}`
-  //     });
-  //   }
-  // },
+      const search = _.chain(properties)
+        .find({
+          owner,
+          id
+        })
+        .merge({
+          address,
+          status,
+          price,
+          state,
+          city,
+          type,
+          ownerEmail,
+          ownerPhoneNumber
+        });
+      res.status(200).send({
+        status: 'success',
+        data: search,
+        dataProperty: properties
+      });
+    }
+    catch (error) {
+      await res.status(500).send({
+        message: `error: ${error}`
+      });
+    }
+  },
   // async delete(req, res) {
   //   try {
   //     const { id } = req.params;
