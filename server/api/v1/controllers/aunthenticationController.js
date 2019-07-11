@@ -12,6 +12,7 @@ const users = [{
 
 const _ = require('lodash');
 
+const joi = require('joi');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 
@@ -27,44 +28,132 @@ const {
 
 const v = new Validator();
 module.exports = {
-  async register(req, res) {
+  async register(req, res, next) {
     try {
       const id_auto_inc = users[users.length - 1].id + 1;
       const {
         address,
         email,
-        firstName,
-        lastName,
+        first_name,
+        last_name,
         password,
-        confirmPassword,
-        phoneNumber,
-        isAdmin
+        confirm_password,
+        phone_number,
+        is_admin
       } = req.body;
       const user = {
         id: id_auto_inc,
         address,
         email,
-        firstName,
-        lastName,
+        first_name,
+        last_name,
         password,
-        confirmPassword,
-        phoneNumber,
-        isAdmin
+        confirm_password,
+        phone_number,
+        is_admin
       };
+      console.log(Object.values(user).indexOf(undefined))
+      if (Object.values(user).indexOf(undefined) > -1) throw res.send({
+        message: 'all the fields are required'
+      });
+      const schema = joi.object().keys({
+        id: joi.number().integer(),
+        email: joi.string().email(),
+        password: joi.string().regex(new RegExp('^[a-zA-Z1-9]{8,32}$')),
+        address: joi.string(),
+        first_name: joi.string(),
+        last_name: joi.string(),
+        confirm_password: joi.string(),
+        phone_number: joi.string().regex(new RegExp('^[1-9]{10}$')),
+        is_admin: joi.boolean()
+      });
+      const {
+        error,
+        value
+      } = joi.validate(user, schema);
 
-      const User = v.validate(user, schema);
-      if (User.errors.length !== 0) throw User.errors;
-      users.push(user);
+      if (error) {
+        switch (error.details[0].context.key) {
+          case 'email':
+            res.status(400).send({
+              status: 'error',
+              'error': `you must provide a valid email`
+            });
+            break;
+          case 'id':
+            res.status(400).send({
+              status: 'error',
+              'error': `you must provide a valid id`
+            });
+            break;
 
-      console.log(`${id_auto_inc}   ${users}`);
-      await res.status(200).send({
+          case 'password':
+            res.status(400).send({
+              status: 'error',
+              'error': `password provided failed to match the following rules:
+              <br>
+              1. must contain the following charaters: lower case, upper case, integers
+              <br>
+              2. It must at least be 8 - 32 characters long
+              `
+            });
+            break;
+
+          case 'confirm_password':
+            res.status(400).send({
+              status: 'error',
+              'error': `please confirm the password`
+            });
+            break;
+
+          case 'address':
+            res.status(400).send({
+              status: 'error',
+              'error': `you must provide a valid address`
+            });
+            break;
+
+          case 'phone_number':
+            res.status(400).send({
+              status: 'error',
+              'error': `the phone number need to be 8 characters long`
+            });
+            break;
+
+          case 'first_name':
+            res.status(400).send({
+              status: 'error',
+              'error': `you must provide a valid first name`
+            });
+            break;
+
+          case 'last_name':
+            res.status(400).send({
+              status: 'error',
+              'error': `you must provide a valid last name`
+            });
+            break;
+          default:
+            res.status(400).send({
+              status: 'error',
+              'error': `invalid information`
+            });
+            break;
+        }
+      } else next();
+      console.log(value);
+      // const User = v.validate(user, schema);
+      // if (User.errors.length !== 0) throw User.errors;
+      const User = users.push(value);
+
+      await res.status(201).send({
         status: 'success',
-        array: users.length,
+        array: value.length,
         data: users
       });
     } catch (error) {
       await res.status(500).send({
-        message: `error: ${error}`
+        error: `error: ${error}`
       });
     }
   },
@@ -89,12 +178,22 @@ module.exports = {
         });
       }
       console.log(UserValid);
+      
+
+      
+      
       const token = jwt.sign(User, app.get('appSecret'));
       console.log(token);
+      const bro = jwt.verify(token, app.get('appSecret'), (err, decoded) => {
+            if (err) throw err
+            console.log(res.decoded = decoded);
+            });
+      console.log(bro)
       res.status(200).json({
         status: 'success',
         data: token
       });
+
     } catch (error) {
       res.status(403).send({
         status: 'error',

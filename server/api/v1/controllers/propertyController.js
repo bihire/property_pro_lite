@@ -71,7 +71,7 @@ module.exports = {
       res.status(200).send({
         status: 'success',
         array: properties.length,
-        data: properties
+        data: Property.instance
       });
     }
     catch (error) {
@@ -195,7 +195,7 @@ module.exports = {
   async delete(req, res) {
     try {
       const { id, owner } = req.body
-      const validId = properties.find(property => property.owner == owner && property.id == id);
+      const validId = await properties.find(property => property.owner == owner && property.id == id);
 
       if (validId == undefined) {
         throw res.status(404).send({
