@@ -1,13 +1,13 @@
 const users = [{
   id: 1,
-  address: 'bro',
-  email: 'bro',
-  firstName: 'bro',
-  lastName: 'bro',
-  password: 'bro',
-  confirmPassword: 'bro',
-  phoneNumber: 'bro',
-  isAdmin: true
+  address: "fgh",
+  email: "muhirebori@yahoo.fr",
+  first_name: "bro",
+  last_name: "bro",
+  password: "bro",
+  confirm_password: "bro",
+  phone_number: "bro",
+  is_admin: true
 }];
 
 const _ = require('lodash');
@@ -140,17 +140,17 @@ module.exports = {
             });
             break;
         }
-      } else next();
-      console.log(value);
+      } else {
+        users.push(value);
+        res.status(201).send({
+          status: 'success',
+          array: value.length,
+          data: value
+        });
+      };
+      console.log(users);
       // const User = v.validate(user, schema);
       // if (User.errors.length !== 0) throw User.errors;
-      const User = users.push(value);
-
-      await res.status(201).send({
-        status: 'success',
-        array: value.length,
-        data: users
-      });
     } catch (error) {
       await res.status(500).send({
         error: `error: ${error}`
@@ -179,9 +179,7 @@ module.exports = {
       }
       console.log(UserValid);
       
-
-      
-      
+      console.log(Owner)
       const token = jwt.sign(User, app.get('appSecret'));
       console.log(token);
       const bro = jwt.verify(token, app.get('appSecret'), (err, decoded) => {
