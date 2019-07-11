@@ -29,41 +29,43 @@ const properties = [
   }
 ];
 const _ = require('lodash');
+const jwt = require('jsonwebtoken');
+const express = require('express');
+const app = express();
 const Validator = require('jsonschema').Validator;
 const { Propertyschema } = require('../models/property');
 const { dateTime } = require('../models/date');
 
 const v = new Validator();
 
+
 module.exports = {
   async add(req, res) {
     try {
+      const decode = jwt.decode(req.headers.token, app.get('appSecret'));
       const id_auto_inc = properties[properties.length - 1].id + 1;
       const {
         address,
-        owner,
         status,
         price,
         state,
         city,
-        type,
-        ownerEmail,
-        ownerPhoneNumber
+        type
       } = req.body;
       const property = {
         id: id_auto_inc,
         address,
-        owner,
+        owner: decode.id,
         status,
         price,
         state,
         city,
         type,
         created_on: dateTime,
-        ownerEmail,
-        ownerPhoneNumber
+        ownerEmail: decode.email,
+        ownerPhoneNumber: decode.phone_number
       };
-      console.log(dateTime);
+      console.log(decode);
       const Property = v.validate(property, Propertyschema);
       if (Property.errors.length !== 0) throw Property.errors;
       properties.push(Property.instance);
@@ -136,10 +138,10 @@ module.exports = {
     }
   },
   async get_by_user(req, res) {
+    const decode = jwt.decode(req.headers.token, app.get('appSecret'));
     try {
-      const { user_id } = req.params;
 
-      const validUserId = properties.filter(property => property.owner == user_id);
+      const validUserId = properties.filter(property => property.owner == decode.id);
 
       if (validUserId == undefined) {
         throw res.status(404).send({
@@ -194,8 +196,9 @@ module.exports = {
   },
   async delete(req, res) {
     try {
-      const { id, owner } = req.body
-      const validId = await properties.find(property => property.owner == owner && property.id == id);
+      const decode = jwt.decode(req.headers.token, app.get('appSecret'));
+      const { id } = req.params
+      const validId = await properties.find(property => property.owner == decode.id && property.id == id);
 
       if (validId == undefined) {
         throw res.status(404).send({

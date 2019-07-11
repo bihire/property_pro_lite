@@ -179,7 +179,7 @@ module.exports = {
       }
       console.log(UserValid);
       
-      console.log(Owner)
+    
       const token = jwt.sign(User, app.get('appSecret'));
       console.log(token);
       const bro = jwt.verify(token, app.get('appSecret'), (err, decoded) => {
