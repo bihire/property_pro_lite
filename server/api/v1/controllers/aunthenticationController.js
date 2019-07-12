@@ -1,12 +1,12 @@
 const users = [{
-  owner: 1,
-  address: "fgh",
+  owner: 2,
+  address: "fgfghjhh",
   email: "muhirebori@yahoo.fr",
-  first_name: "bro",
+  first_name: "sdfgh",
   last_name: "bro",
-  password: "bro",
-  confirm_password: "bro",
-  phone_number: "bro",
+  password: "bro1234333",
+  confirm_password: "bro1234333",
+  phone_number: "3341234333",
   is_admin: true
 }];
 

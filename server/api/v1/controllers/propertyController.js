@@ -25,7 +25,7 @@ const properties = [
     created_on: '2018-11-13T20:20:39+00:00',
     image_url: 'https://www.google.be/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
     ownerEmail: 'muhireboris@yahoo.fr',
-    ownerPhoneNumber: '0798734567'
+    ownerPhoneNumber: '3341234333'
   }
 ];
 const _ = require('lodash');
@@ -51,12 +51,13 @@ module.exports = {
         price,
         state,
         city,
-        type
+        type,
+        image_url
       } = req.body;
       const property = {
         property_id: id_auto_inc,
         address,
-        owner: decode.id,
+        owner: decode.owner,
         status,
         price,
         state,
@@ -64,7 +65,8 @@ module.exports = {
         type,
         created_on: dateTime,
         ownerEmail: decode.email,
-        ownerPhoneNumber: decode.phone_number
+        ownerPhoneNumber: decode.phone_number,
+        image_url
       };
       
       const {
@@ -84,6 +86,13 @@ module.exports = {
              res.status(400).send({
                status: 'error',
                'error': `the owner must be valid`
+             });
+             break;
+
+             case 'image_url':
+             res.status(400).send({
+               status: 'error',
+               'error': `the owner must be image url`
              });
              break;
 
@@ -153,7 +162,7 @@ module.exports = {
              break;
          }
        } else {
-        users.push(value);
+        properties.push(value);
         res.status(201).send({
           status: 'success',
           array: value.length,
@@ -222,11 +231,37 @@ module.exports = {
       });
     }
   },
-  async get_by_user(req, res) {
-    const decode = jwt.decode(req.headers.token, app.get('appSecret'));
-    try {
+  async get_self(req, res) {
 
-      const validUserId = properties.filter(property => property.owner == decode.id);
+    try {
+      
+      const decode = jwt.decode(req.headers.token, app.get('appSecret'));
+      console.log(decode);
+      const validUserId = properties.filter(property => property.owner == decode.owner);
+
+      if (validUserId == undefined) {
+        throw res.status(404).send({
+          status: 'error',
+          error: "the user doesn't exist"
+        });
+      }
+      res.status(200).send({
+        status: 'success',
+        data: validUserId
+      });
+    } catch (error) {
+      res.status(500).send({
+        status: 'error',
+        error: `Error fetching property:   ${error}`
+      });
+    }
+  },
+  async get_by_user(req, res) {
+    
+    try {
+      const { owner } = req.params
+      const decode = jwt.decode(req.headers.token, app.get('appSecret'));
+      const validUserId = properties.filter(property => property.owner == owner);
 
       if (validUserId == undefined) {
         throw res.status(404).send({
@@ -248,32 +283,31 @@ module.exports = {
   },
   async update(req, res) {
     try {
+      const decode = jwt.decode(req.headers.token, app.get('appSecret'));
+      const { property_id } = req.params;
       const {
-        address, status, price, state, city, type, ownerEmail, ownerPhoneNumber, owner, id
+        address, status, price, state, city, type
       } = req.body;
 
-      const search = _.chain(properties)
-        .find({
-          owner,
-          id
-        })
-        .merge({
-          address,
-          status,
-          price,
-          state,
-          city,
-          type,
-          ownerEmail,
-          ownerPhoneNumber
+      let update = properties.find(property => property.owner == 1 && property.property_id == property_id)
+      if (update == undefined) {
+        throw res.status(404).send({
+          status: 'error',
+          error: "the property doesn't exist"
         });
+      }
+      update.address = address ? address : update.adress;
+      update.status = status ? status : update.status;
+      update.price = price ? price : update.price;
+      update.state = state ? state : update.state;
+      update.city = city ? city : update.city;
+      update.type = type ? type : update.type;
+        
       res.status(200).send({
         status: 'success',
-        data: search,
-        dataProperty: properties
+        dataProperty: update
       });
-    }
-    catch (error) {
+    } catch (error) {
       await res.status(500).send({
         message: `error: ${error}`
       });
