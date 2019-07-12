@@ -1,6 +1,6 @@
 const properties = [
   {
-    id: 1,
+    property_id: 1,
     address: 'bro',
     owner: 1,
     status: 'bro',
@@ -14,7 +14,7 @@ const properties = [
     ownerPhoneNumber: '0798734567'
   },
   {
-    id: 1,
+    property_id: 1,
     address: 'bro',
     owner: 1,
     status: 'bro',
@@ -31,9 +31,10 @@ const properties = [
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 const express = require('express');
+const joi = require('joi');
 const app = express();
 const Validator = require('jsonschema').Validator;
-const { Propertyschema } = require('../models/property');
+const { schema } = require('../models/property');
 const { dateTime } = require('../models/date');
 
 const v = new Validator();
@@ -43,7 +44,7 @@ module.exports = {
   async add(req, res) {
     try {
       const decode = jwt.decode(req.headers.token, app.get('appSecret'));
-      const id_auto_inc = properties[properties.length - 1].id + 1;
+      const id_auto_inc = properties[properties.length - 1].property_id + 1;
       const {
         address,
         status,
@@ -53,7 +54,7 @@ module.exports = {
         type
       } = req.body;
       const property = {
-        id: id_auto_inc,
+        property_id: id_auto_inc,
         address,
         owner: decode.id,
         status,
@@ -65,16 +66,100 @@ module.exports = {
         ownerEmail: decode.email,
         ownerPhoneNumber: decode.phone_number
       };
-      console.log(decode);
-      const Property = v.validate(property, Propertyschema);
-      if (Property.errors.length !== 0) throw Property.errors;
-      properties.push(Property.instance);
+      
+      const {
+        error,
+        value
+      } = joi.validate(property, schema);
 
-      res.status(200).send({
-        status: 'success',
-        array: properties.length,
-        data: Property.instance
-      });
+       if (error) {
+         switch (error.details[0].context.key) {
+           case 'address':
+             res.status(400).send({
+               status: 'error',
+               'error': `you must provide a valid address`
+             });
+             break;
+           case 'owner':
+             res.status(400).send({
+               status: 'error',
+               'error': `the owner must be valid`
+             });
+             break;
+
+           case 'status':
+             res.status(400).send({
+               status: 'error',
+               'error': `password provided failed to match the following rules:
+              <br>
+              1. must contain the following charaters: lower case, upper case, integers
+              <br>
+              2. It must at least be 8 - 32 characters long
+              `
+             });
+             break;
+
+           case 'price':
+             res.status(400).send({
+               status: 'error',
+               'error': `please make sure confirm the password equals to password`
+             });
+             break;
+
+           case 'state':
+             res.status(400).send({
+               status: 'error',
+               'error': `you must provide a valid address`
+             });
+             break;
+
+           case 'city':
+             res.status(400).send({
+               status: 'error',
+               'error': `the phone number need to be 8 characters long`
+             });
+             break;
+
+           case 'type':
+             res.status(400).send({
+               status: 'error',
+               'error': `you must provide a valid first name`
+             });
+             break;
+
+           case 'created_on':
+             res.status(400).send({
+               status: 'error',
+               'error': `you must provide a valid last name`
+             });
+             break;
+          case 'ownerEmail':
+             res.status(400).send({
+               status: 'error',
+               'error': `you must provide a valid last name`
+             });
+             break;
+             case 'ownerPhoneNumber':
+             res.status(400).send({
+               status: 'error',
+               'error': `you must provide a valid last name`
+             });
+             break;
+           default:
+             res.status(400).send({
+               status: 'error',
+               'error': `invalid information`
+             });
+             break;
+         }
+       } else {
+        users.push(value);
+        res.status(201).send({
+          status: 'success',
+          array: value.length,
+          data: value
+        });
+       }
     }
     catch (error) {
       res.status(500).send({
@@ -85,17 +170,17 @@ module.exports = {
   async get_all(req, res) {
     try {
       let propertis = null;
-      const { search } = req.query;
-      if (search) {
-        function filterByValue(properties, search) {
+      const { type } = req.query;
+      if (type) {
+        function filterByValue(properties, type) {
           propertis = properties.filter((v, i) => {
-            if (v.type.toLowerCase().indexOf(search) >= 0) {
+            if (v.type.toLowerCase().indexOf(type) >= 0) {
               return true;
             }
             false;
           });
         }
-        filterByValue(properties, search);
+        filterByValue(properties, type);
 
         res.send(propertis);
       }
@@ -115,9 +200,9 @@ module.exports = {
   },
   async get(req, res) {
     try {
-      const { id } = req.params;
+      const { property_id } = req.params;
 
-      const validId = properties.find(property => property.id == id);
+      const validId = properties.find(property => property.property_id == property_id);
 
       if (validId == undefined) {
         throw res.status(404).send({

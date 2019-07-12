@@ -1,48 +1,18 @@
-// Person
-const Propertyschema = {
-  type: 'object',
-  properties: {
-    owner: {
-      type: 'integer'
-    },
-    id: {
-      type: 'integer'
-    },
-    status: {
-      type: 'string'
-    },
-    price: {
-      type: 'number'
-    },
-    state: {
-      type: 'string'
-    },
-    city: {
-      type: 'string'
-    },
-    address: {
-      type: 'string'
-    },
-    type: {
-      type: 'string'
-    },
-    created_on: {
-      type: 'string',
-      format: 'date-time'
-    },
-    image_url: {
-      type: 'string',
-      format: 'uri'
-    },
-    ownerEmail: {
-      type: 'string'
-    },
-    ownerPhoneNumber: {
-      type: 'string'
-    }
-  }
-};
+ const joi = require('joi');
+ 
+ const schema = joi.object().keys({
+   owner: joi.number().integer().required(),
+   OwnerEmail: joi.string().email().trim().required(),
+   OwnerPhoneNumber: joi.string().regex(new RegExp('^[1-9]{10}$')).trim().required(),
+   property_id: joi.number().integer().required(),
+   address: joi.string().trim().regex(/^[a-zA-Z0-9!@#$%&*]{3,25}$/).required(),
+   status: joi.boolean().default('onsale').required(),
+   type: joi.string().trim().regex(/^[a-zA-Z0-9!@#$%&*]{3,25}$/).required(),
+   price: joi.number().min(0).required(),
+   state: joi.string().trim().regex(/^[a-zA-Z0-9!@#$%&*]{3,25}$/).required(),
+   city: joi.string().trim().regex(/^[a-zA-Z0-9!@#$%&*]{3,25}$/).required(),
+   created_on: joi.string().required()
+ });
+ 
 
-module.exports = {
-  Propertyschema
-};
+ module.exports = { schema };

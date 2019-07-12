@@ -1,5 +1,5 @@
 const users = [{
-  id: 1,
+  owner: 1,
   address: "fgh",
   email: "muhirebori@yahoo.fr",
   first_name: "bro",
@@ -30,7 +30,7 @@ const v = new Validator();
 module.exports = {
   async register(req, res, next) {
     try {
-      const id_auto_inc = users[users.length - 1].id + 1;
+      const id_auto_inc = users[users.length - 1].owner + 1;
       const {
         address,
         email,
@@ -42,7 +42,7 @@ module.exports = {
         is_admin
       } = req.body;
       const user = {
-        id: id_auto_inc,
+        owner: id_auto_inc,
         address,
         email,
         first_name,
@@ -52,20 +52,20 @@ module.exports = {
         phone_number,
         is_admin
       };
-      console.log(Object.values(user).indexOf(undefined))
-      if (Object.values(user).indexOf(undefined) > -1) throw res.send({
-        message: 'all the fields are required'
-      });
+      // console.log(Object.values(user).indexOf(undefined))
+      // if (Object.values(user).indexOf(undefined) > -1) throw res.send({
+      //   message: 'all the fields are required'
+      // });
       const schema = joi.object().keys({
-        id: joi.number().integer(),
-        email: joi.string().email(),
-        password: joi.string().regex(new RegExp('^[a-zA-Z1-9]{8,32}$')),
-        address: joi.string(),
-        first_name: joi.string(),
-        last_name: joi.string(),
-        confirm_password: joi.string(),
-        phone_number: joi.string().regex(new RegExp('^[1-9]{10}$')),
-        is_admin: joi.boolean()
+        owner: joi.number().integer().required(),
+        email: joi.string().email().trim().required(),
+        password: joi.string().regex(new RegExp('^[a-zA-Z1-9]{8,32}$')).required(),
+        address: joi.string().trim().regex(/^[a-zA-Z0-9!@#$%&*]{3,25}$/).required(),
+        first_name: joi.string().trim().regex(/^[a-zA-Z0-9!@#$%&*]{3,25}$/).required(),
+        last_name: joi.string().trim().regex(/^[a-zA-Z0-9!@#$%&*]{3,25}$/).required(),
+        confirm_password: joi.string().required().valid(joi.ref('password')),
+        phone_number: joi.string().regex(new RegExp('^[1-9]{10}$')).trim().required(),
+        is_admin: joi.boolean().default(false).required()
       });
       const {
         error,
@@ -80,7 +80,7 @@ module.exports = {
               'error': `you must provide a valid email`
             });
             break;
-          case 'id':
+          case 'owner':
             res.status(400).send({
               status: 'error',
               'error': `you must provide a valid id`
@@ -102,7 +102,7 @@ module.exports = {
           case 'confirm_password':
             res.status(400).send({
               status: 'error',
-              'error': `please confirm the password`
+              'error': `please make sure confirm the password equals to password`
             });
             break;
 
@@ -148,7 +148,6 @@ module.exports = {
           data: value
         });
       };
-      console.log(users);
       // const User = v.validate(user, schema);
       // if (User.errors.length !== 0) throw User.errors;
     } catch (error) {
