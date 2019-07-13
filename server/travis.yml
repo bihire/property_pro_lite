@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - "node_modules"
+scripts:
+  - npm run test
+before_script:
+  - npm install jsonwebtoken
+after_success:
+- npm install covaralls && npm run covarage
