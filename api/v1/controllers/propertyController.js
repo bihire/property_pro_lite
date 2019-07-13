@@ -176,7 +176,7 @@ module.exports = {
       });
     }
   },
-  async get_all(req, res) {
+  async all(req, res) {
     try {
       let propertis = null;
       const { type } = req.query;
