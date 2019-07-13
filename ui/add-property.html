@@ -18,18 +18,43 @@
 </head>
 
 <body>
-  <div id="navbar">
-    <a href="./login.html">Login</a>
-    <a href="./signup.html">Register</a>
-
-    <a href="#">contact</a>
-    <a href="#">About</a>
-    <a href="./index.html">Home</a>
-  </div>
+  <nav class="navbar">
+    <span class="navbar-toggle" id="js-navbar-toggle">
+      <i class="fa fa-bars"></i>
+    </span>
+    <a href="../index.html" class="logo">logo</a>
+    <ul class="main-nav" id="js-menu">
+      <li>
+        <a href="../index.html" class="nav-links">Home</a>
+      </li>
+      <li>
+        <a href="../index.html" class="nav-links">Properties</a>
+      </li>
+      <li>
+        <a href="./signup.html" class="nav-links">Register</a>
+      </li>
+      <li>
+        <a href="./login.html" class="nav-links">Login</a>
+      </li>
+      <li>
+        <a href="../index.html" class="nav-links">Logout</a>
+      </li>
+    </ul>
+  </nav>
 
   <!-- info part -->
   <div class="prime">
     <div class="container">
+      <div class="profile">
+        <div class="profile-card">
+          <div class="image">
+            <img src="images/peace.jpg" alt="Avatar" style="width:100%">
+          </div>
+          <div class="name">
+            <p>bihire jules boris</p>
+          </div>
+        </div>
+      </div>
       <div class="content">
         <h4 id="title">Post a Property</h4>
 
@@ -133,7 +158,8 @@
 
             </form>
             <div class="submit">
-              <input type="submit" role="button" class="submit_button" value="Submit" />
+              <a href="./all properties.html"><input type="submit" role="button" class="submit_button"
+                  value="Submit" /></a>
             </div>
           </div>
 
@@ -142,16 +168,7 @@
       </div>
     </div>
 
-    <div class="profile">
-      <div class="profile-card">
-        <div class="image">
-          <img src="images/peace.jpg" alt="Avatar" style="width:100%">
-        </div>
-        <div class="name">
-          <p>bihire jules boris</p>
-        </div>
-      </div>
-    </div>
+
   </div>
   </div>
 </body>
