@@ -10,6 +10,6 @@ router.get('/property/:property_id', PropertyController.get);
 router.get('/property/all', PropertyController.get_all);
 router.get('/property/user/:owner', PropertyController.get_by_user);
 router.get('/property/user/all',jwt, PropertyController.get_self);
-router.delete('/property/:property-id',jwt, PropertyController.delete);
+router.delete('/property/:property_id',jwt, PropertyController.delete);
 
 module.exports = router;

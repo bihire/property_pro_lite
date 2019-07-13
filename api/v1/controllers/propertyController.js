@@ -16,7 +16,7 @@ const properties = [
   {
     property_id: 1,
     address: 'bro',
-    owner: 1,
+    owner: 2,
     status: 'bro',
     price: 2.0847,
     state: 'bro',
@@ -316,9 +316,8 @@ module.exports = {
   async delete(req, res) {
     try {
       const decode = jwt.decode(req.headers.token, app.get('appSecret'));
-      const { id } = req.params
-      const validId = await properties.find(property => property.owner == decode.id && property.id == id);
-
+      const { property_id } = req.params
+      const validId = await properties.find(property => property.owner == decode.owner && property.property_id == property_id);
       if (validId == undefined) {
         throw res.status(404).send({
           status: 'error',

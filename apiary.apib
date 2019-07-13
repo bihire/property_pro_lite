@@ -1,0 +1,338 @@
+FORMAT: 1A
+HOST: https://obscure-gorge-85073.herokuapp.com/api/v1
+
+# PropertyProLite
+
+Property Pro Lite is a platform where people can create and/or search properties for sale or rent.
+
+## Properties collection [/property/all]
+
+### List All properties [GET]
+
++ Response 200 (application/json)
+
+        [
+              {
+                "category": "Sifn fgle room",
+                "name": "Houscbhfxce",
+                "reason": "renfhfcbct",
+                "price": "7000",
+                "state": "tancbvbczania",
+                "city": "arusha",
+                "address": "76768",
+                "map": "90800,89900",
+                "description": "Very coovbvbvl house",
+                "url": "https://res.cloudinary.com/hezzie/image/upload/v1561036548/PropertyProLiteAPI/2019-06-20T13:15:46.472Z.png",
+                "id": 9023
+              }
+        ]
+
+
+### Single property [/property/1]
+
+### Fetch a single property [GET]
+
++ Response 200 (application/json)
+
+          {
+            "category": "Sifn fgle room",
+            "name": "Houscbhfxce",
+            "reason": "renfhfcbct",
+            "price": "7000",
+            "state": "tancbvbczania",
+            "city": "arusha",
+            "address": "76768",
+            "map": "90800,89900",
+            "description": "Very coovbvbvl house",
+            "url": "https://res.cloudinary.com/hezzie/image/upload/v1561036548/PropertyProLiteAPI/2019-06-20T13:15:46.472Z.png",
+            "id": 9023
+          }
+
+### Single property [/property]
+
+### Create a New Property [POST]
+
+You may post your own property using this action. It takes a JSON
+object containing a property name, propertytype, and an uploaded image.
+
++ Request 200 (application/json)
+    + Headers
+
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvd25lciI6MiwiYWRkcmVzcyI6ImZnZmdoamhoIiwiZW1haWwiOiJtdWhpcmVib3JpQHlhaG9vLmZyIiwiZmlyc3RfbmFtZSI6InNkZmdoIiwibGFzdF9uYW1lIjoiYnJvIiwicGFzc3dvcmQiOiJicm8xMjM0MzMzIiwiY29uZmlybV9wYXNzd29yZCI6ImJybzEyMzQzMzMiLCJwaG9uZV9udW1iZXIiOiIzMzQxMjM0MzMzIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTU2Mjg5NzQxOX0.vVwmgG0fF6rWz8PW-bLMdzKp7RN1Hj_iYfBHJK8OEJI"
+
+    + body
+
+            {
+                "address": "bro",
+                "status": "bro",
+                "price": 2.0847,
+                "state": "bro",
+                "city": "bro",
+                "type": "bro i am",
+                "created_on": "2018-11-13T20:20:39+00:00",
+                "image_url": "https://www.google.be/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+            }
+
++ Response 200 (application/json)
+
+    + Headers
+
+            Location: /properties/post-property
+
+    + Body
+
+              {
+                "property_id": 1,
+                "address": "bro",
+                "owner": 1,
+                "status": "bro",
+                "price": 2.0847,
+                "state": "bro",
+                "city": "bro",
+                "type": "bro i am",
+                "created_on": "2018-11-13T20:20:39+00:00",
+                "image_url": "https://www.google.be/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+                "ownerEmail": "muhireboris@yahoo.fr",
+                "ownerPhoneNumber": "0798734567"
+              }
+
+## Update a Property [/property/:property_id]
+
+### List All users [PATCH]
+
++ Request 200 (application/json)
+
+    + Headers
+
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvd25lciI6MiwiYWRkcmVzcyI6ImZnZmdoamhoIiwiZW1haWwiOiJtdWhpcmVib3JpQHlhaG9vLmZyIiwiZmlyc3RfbmFtZSI6InNkZmdoIiwibGFzdF9uYW1lIjoiYnJvIiwicGFzc3dvcmQiOiJicm8xMjM0MzMzIiwiY29uZmlybV9wYXNzd29yZCI6ImJybzEyMzQzMzMiLCJwaG9uZV9udW1iZXIiOiIzMzQxMjM0MzMzIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTU2Mjg5NzQxOX0.vVwmgG0fF6rWz8PW-bLMdzKp7RN1Hj_iYfBHJK8OEJI"
+
+    + body
+
+              {
+                "state": "bro1",
+                "city": "brohk",
+                "type": "bro you are not"
+              }
+
++ Response 200 (application/json)
+
+    + Body
+
+              {
+                "property_id": 1,
+                "address": "bro",
+                "owner": 1,
+                "status": "bro",
+                "price": 2.0847,
+                "state": "bro1",
+                "city": "brohk",
+                "type": "bro you are not",
+                "created_on": "2018-11-13T20:20:39+00:00",
+                "image_url": "https://www.google.be/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+                "ownerEmail": "muhireboris@yahoo.fr",
+                "ownerPhoneNumber": "0798734567"
+              }
+
+### Update the status of a product [/property/1/sold]
+
+### Fetch a single user [PATCH]
+
++ Request  200 (application/json)
+
+    + Headers
+
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvd25lciI6MiwiYWRkcmVzcyI6ImZnZmdoamhoIiwiZW1haWwiOiJtdWhpcmVib3JpQHlhaG9vLmZyIiwiZmlyc3RfbmFtZSI6InNkZmdoIiwibGFzdF9uYW1lIjoiYnJvIiwicGFzc3dvcmQiOiJicm8xMjM0MzMzIiwiY29uZmlybV9wYXNzd29yZCI6ImJybzEyMzQzMzMiLCJwaG9uZV9udW1iZXIiOiIzMzQxMjM0MzMzIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTU2Mjg5NzQxOX0.vVwmgG0fF6rWz8PW-bLMdzKp7RN1Hj_iYfBHJK8OEJI"
+
+    + Body
+
+            {
+                "status": "sold"
+            }
+
++ Response 200 (application/json)
+
+          {
+            "firstName": "hezron",
+            "secondName": "kimutai",
+            "userName": "hezzie",
+            "email": "hez@gmail.com",
+            "phoneNumber": "0937892356",
+            "password": "reqfhgtfhfgjfg",
+            "confirmPassword": "reqfhgtfhfgjfg",
+            "id": 5209
+          }
+
+### Create a New user [/auth/signup]
+
+### Create a New user [POST]
+
+You may signup using this action. It takes a JSON
+object containing a username and password.
+
++ Request 200 (application/json)
+
+    + body
+
+            {
+                "address": "fgfghjhh",
+                "email": "muhirebori@yahoo.fr",
+                "first_name": "sdfgh",
+                "last_name": "bro",
+                "password": "bro1234333",
+                "confirm_password": "bro1234333",
+                "phone_number": "3341234333",
+                "is_admin": true
+            }
+
++ Response 201 (application/json)
+
+    + Body
+    
+              {
+                "firstName": "hezron",
+                "secondName": "kimutai",
+                "userName": "hezzie",
+                "email": "hez@gmail.com",
+                "phoneNumber": "0937892356",
+                "password": "reqfhgtfhfgjfg",
+                "confirmPassword": "reqfhgtfhfgjfg",
+                "id": 2
+              }
+
+### Login a New user [/auth/signin]
+
+### Login a New user [POST]
+
+You may signup using this action. It takes a JSON
+object containing a username and password.
+
++ Request 200 (application/json)
+
+    + body
+
+            {
+                "email": "muhirebori@yahoo.fr",
+                "password": "bro1234333",
+            }
+
++ Response 201 (application/json)
+
+    + Body
+    
+              {
+              "status": "success",
+              "data":[
+                    {
+                        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvd25lciI6MiwiYWRkcmVzcyI6ImZnZmdoamhoIiwiZW1haWwiOiJtdWhpcmVib3JpQHlhaG9vLmZyIiwiZmlyc3RfbmFtZSI6InNkZmdoIiwibGFzdF9uYW1lIjoiYnJvIiwicGFzc3dvcmQiOiJicm8xMjM0MzMzIiwiY29uZmlybV9wYXNzd29yZCI6ImJybzEyMzQzMzMiLCJwaG9uZV9udW1iZXIiOiIzMzQxMjM0MzMzIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTU2Mjg5NzQxOX0.vVwmgG0fF6rWz8PW-bLMdzKp7RN1Hj_iYfBHJK8OEJI",
+                    }
+                ]
+              }
+              
+
+### Get a property [/property/:property_id]
+
+### Get a property [GET]
+
+You may signup using this action. It takes a JSON
+object containing a username and password.
+
+
++ Response 201 (application/json)
+
+    + Body
+    
+              {
+                "status": "success",
+                "data": [
+                    {
+                        "property_id": 1,
+                        "address": "bro",
+                        "owner": 1,
+                        "status": "bro",
+                        "price": 2.0847,
+                        "state": "bro1",
+                        "city": "brohk",
+                        "type": "bro you are not",
+                        "created_on": "2018-11-13T20:20:39+00:00",
+                        "image_url": "https://www.google.be/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+                        "ownerEmail": "muhireboris@yahoo.fr",
+                        "ownerPhoneNumber": "0798734567"
+                    }
+                ]
+              }
+              
+
+
+### Get all owner properties [/property/user/all]
+
+### Get all owner properties [GET]
+
+You may signup using this action. It takes a JSON
+object containing a username and password.
+
++ Request 200 (application/json)
+    + Headers
+
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvd25lciI6MiwiYWRkcmVzcyI6ImZnZmdoamhoIiwiZW1haWwiOiJtdWhpcmVib3JpQHlhaG9vLmZyIiwiZmlyc3RfbmFtZSI6InNkZmdoIiwibGFzdF9uYW1lIjoiYnJvIiwicGFzc3dvcmQiOiJicm8xMjM0MzMzIiwiY29uZmlybV9wYXNzd29yZCI6ImJybzEyMzQzMzMiLCJwaG9uZV9udW1iZXIiOiIzMzQxMjM0MzMzIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTU2Mjg5NzQxOX0.vVwmgG0fF6rWz8PW-bLMdzKp7RN1Hj_iYfBHJK8OEJI"
+
+
++ Response 201 (application/json)
+
+    + Body
+
+              {
+                "status": "success",
+                "data": [
+                    {
+                    "property_id": 1,
+                    "address": "bro",
+                    "owner": 1,
+                    "status": "bro",
+                    "price": 2.0847,
+                    "state": "bro1",
+                    "city": "brohk",
+                    "type": "bro you are not",
+                    "created_on": "2018-11-13T20:20:39+00:00",
+                    "image_url": "https://www.google.be/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+                    "ownerEmail": "muhireboris@yahoo.fr",
+                    "ownerPhoneNumber": "0798734567"
+              },
+                {
+                    "property_id": 1,
+                    "address": "bro",
+                    "owner": 1,
+                    "status": "bro",
+                    "price": 2.0847,
+                    "state": "bro1",
+                    "city": "brohk",
+                    "type": "bro you are not",
+                    "created_on": "2018-11-13T20:20:39+00:00",
+                    "image_url": "https://www.google.be/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+                    "ownerEmail": "muhireboris@yahoo.fr",
+                    "ownerPhoneNumber": "0798734567"
+              }
+                ]
+            }
+
+### Delete a property [/property/:property_id]
+
+### Delete a property [DELETE]
+
+You may signup using this action. It takes a JSON
+object containing a username and password.
+
++ Request 200 (application/json)
+    + Headers
+
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvd25lciI6MiwiYWRkcmVzcyI6ImZnZmdoamhoIiwiZW1haWwiOiJtdWhpcmVib3JpQHlhaG9vLmZyIiwiZmlyc3RfbmFtZSI6InNkZmdoIiwibGFzdF9uYW1lIjoiYnJvIiwicGFzc3dvcmQiOiJicm8xMjM0MzMzIiwiY29uZmlybV9wYXNzd29yZCI6ImJybzEyMzQzMzMiLCJwaG9uZV9udW1iZXIiOiIzMzQxMjM0MzMzIiwiaXNfYWRtaW4iOnRydWUsImlhdCI6MTU2Mjg5NzQxOX0.vVwmgG0fF6rWz8PW-bLMdzKp7RN1Hj_iYfBHJK8OEJI"
+
+
++ Response 201 (application/json)
+
+    + Body
+    
+              {
+                "status": "success",
+                "data": {
+                "message": "2 items successfully deleted"
+              }
