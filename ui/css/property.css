@@ -190,44 +190,49 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 0;
-    height: 70px;
+  .prime .container {
+    display: inline-block;
+
+  }
+
+  .profile-card {
+    border-radius: 3px;
+    transition: 0.3s;
     width: 100%;
-    align-items: center;
+    margin: auto;
+    margin-top: 0;
+    padding: 10px;
+    position: relative;
+    box-sizing: border-box;
+    background-color: rgb(75, 64, 172);
   }
 
-  .main-nav {
-    display: flex;
-    margin-right: 30px;
-    flex-direction: row;
-    justify-content: flex-end;
+  .content {
+    width: 100%;
   }
 
-  .main-nav li {
-    margin: 0;
-  }
-
-  .nav-links {
-    margin-left: 40px;
-  }
-
-  .logo {
+  .profile {
+    width: 100%;
     margin-top: 0;
   }
 
-  .navbar-toggle {
-    display: none;
-  }
-
-  .logo:hover,
-  .nav-links:hover {
-    color: #000;
-  }
-
   .prime {
-    width: 100%
+    display: block;
+    font-size: 14px;
+    font-family: sans-serif;
+    background-color: #fff;
+    margin: 5px 0;
   }
-}
+
+  .backgroundd {
+    height: 200px;
+  }
+
+  .centered {
+    position: absolute;
+    top: 50%;
+    width: 80%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    opacity: 0.8;
+  }
