@@ -7,7 +7,7 @@ router.post('/property',jwt, PropertyController.add);
 router.patch('/property/:property_id',jwt, PropertyController.update);
 router.patch('/property/:property_id/sold',jwt, PropertyController.update);
 router.get('/property/:property_id', PropertyController.get);
-router.get('/property/properties', PropertyController.get_all);
+router.get('/property/properties', PropertyController.all);
 router.get('/property/user/:owner', PropertyController.get_by_user);
 router.get('/property/user/all',jwt, PropertyController.get_self);
 router.delete('/property/:property_id',jwt, PropertyController.delete);
