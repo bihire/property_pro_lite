@@ -6,7 +6,7 @@
    ownerPhoneNumber: joi.string().regex(new RegExp('^[1-9]{10}$')).trim().required(),
    property_id: joi.number().integer().required(),
    address: joi.string().trim().regex(/^[a-zA-Z0-9!@#$%&*]{3,25}$/).required(),
-   status: joi.string().default('onsale').required(),
+   status: joi.string().default('onsale').valid('available', 'sold').required(),
    type: joi.string().allow('').trim().required(),
    price: joi.number().min(0).required(),
    state: joi.string().trim().regex(/^[a-zA-Z0-9!@#$%&*]{3,25}$/).required(),

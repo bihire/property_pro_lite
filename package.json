@@ -7,13 +7,14 @@
     "test": "mocha --require babel-register test/*.js --exit",
     "lint": "eslint --ignore-path .gitignore **/*.js",
     "format": "prettier-eslint **/*.{js,json} --write",
-    "start": "nodemon --exec babel-node --presets babel-preset-env ./app.js"
+    "start": "nodemon --exec babel-node --presets babel-preset-env  ./app.js",
+    "nyctest": "nyc npm run test",
+    "coveralls": "nyc --verbose report --reporter=text-lcov  | coveralls",
+    "ci": "npm run nyctest && npm run coveralls"
   },
   "author": "bihire jules boris",
   "license": "ISC",
-  "devDependencies": {
-
-  },
+  "devDependencies": {},
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",

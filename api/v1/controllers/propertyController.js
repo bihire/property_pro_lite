@@ -92,18 +92,18 @@ module.exports = {
              case 'image_url':
              res.status(400).send({
                status: 'error',
-               'error': `the owner must be image url`
+               'error': `the image url must be valid`
              });
              break;
 
            case 'status':
              res.status(400).send({
                status: 'error',
-               'error': `password provided failed to match the following rules:
+               'error': ` staus can only accept two valiables:
               <br>
-              1. must contain the following charaters: lower case, upper case, integers
+              1. availabe
               <br>
-              2. It must at least be 8 - 32 characters long
+              2. sold
               `
              });
              break;
@@ -111,47 +111,47 @@ module.exports = {
            case 'price':
              res.status(400).send({
                status: 'error',
-               'error': `please make sure confirm the password equals to password`
+               'error': `the price must be 0 or a positive number`
              });
              break;
 
            case 'state':
              res.status(400).send({
                status: 'error',
-               'error': `you must provide a valid address`
+               'error': `you must provide a valid state address`
              });
              break;
 
            case 'city':
              res.status(400).send({
                status: 'error',
-               'error': `the phone number need to be 8 characters long`
+               'error': `the city name must be between 3 to 25 characters long`
              });
              break;
 
            case 'type':
              res.status(400).send({
                status: 'error',
-               'error': `you must provide a valid first name`
+               'error': `the type name must be between 3 to 25 characters long`
              });
              break;
 
            case 'created_on':
              res.status(400).send({
                status: 'error',
-               'error': `you must provide a valid last name`
+               'error': `please provide a valid format`
              });
              break;
           case 'ownerEmail':
              res.status(400).send({
                status: 'error',
-               'error': `you must provide a valid last name`
+               'error': `you must provide a valid email address`
              });
              break;
              case 'ownerPhoneNumber':
              res.status(400).send({
                status: 'error',
-               'error': `you must provide a valid last name`
+               'error': `phone number must contain 10 numbers`
              });
              break;
            default:
@@ -176,32 +176,35 @@ module.exports = {
       });
     }
   },
-  async get_all(req, res) {
+  async getAllProperties(req, res) {
     try {
-      let propertis = null;
-      const { type } = req.query;
-      if (type) {
-        function filterByValue(properties, type) {
-          propertis = properties.filter((v, i) => {
-            if (v.type.toLowerCase().indexOf(type) >= 0) {
-              return true;
-            }
-            false;
+        let types = null;
+        const {
+          type
+        } = req.query;
+        if (type) {
+          function filterByValue(properties, type) {
+            types = properties.filter((v, i) => {
+              if (v.type.toLowerCase().indexOf(type) >= 0) {
+                return true;
+              }
+              false;
+            });
+          }
+          filterByValue(properties, type);
+
+          res.status(200).send({
+            status: 'success',
+              data: types
+          });
+        } else {
+          res.status(200).send({
+            status: 'success',
+            data: properties
           });
         }
-        filterByValue(properties, type);
-
-        res.send(propertis);
-      }
-      else {
-        res.status(200).send({
-          status: 'success',
-          data: properties
-        });
-      }
-    }
-    catch (error) {
-      res.status(500).send({
+    } catch (error) {
+      res.status(400).send({
         status: 'error',
         error: `Error fetching property:   ${error}`
       });
@@ -211,7 +214,7 @@ module.exports = {
     try {
       const { property_id } = req.params;
 
-      const validId = properties.find(property => property.property_id == property_id);
+      const validId = await properties.find(property => property.property_id == property_id);
 
       if (validId == undefined) {
         throw res.status(404).send({
@@ -219,7 +222,7 @@ module.exports = {
           error: "the property doesn't exist"
         });
       }
-      res.status(200).send({
+      await res.status(200).send({
         status: 'success',
         data: validId
       });
@@ -237,8 +240,8 @@ module.exports = {
       
       const decode = jwt.decode(req.headers.token, app.get('appSecret'));
       console.log(decode);
-      const validUserId = properties.filter(property => property.owner == decode.owner);
-
+      const validUserId = await properties.filter(property => property.owner == decode.owner);
+      console.log(validUserId, decode.owner)
       if (validUserId == undefined) {
         throw res.status(404).send({
           status: 'error',
@@ -289,7 +292,7 @@ module.exports = {
         address, status, price, state, city, type
       } = req.body;
 
-      let update = properties.find(property => property.owner == 1 && property.property_id == property_id)
+      let update = properties.find(property => property.owner == decode.owner && property.property_id == property_id)
       if (update == undefined) {
         throw res.status(404).send({
           status: 'error',
@@ -339,4 +342,4 @@ module.exports = {
       });
     }
   }
-};
+}

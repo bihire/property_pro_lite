@@ -168,7 +168,6 @@ module.exports = {
           message: 'Wrong email or password combination.'
         });
       }
-      console.log(typeof User);
 
       const UserValid = User.password === password;
       if (UserValid === false) {
@@ -176,16 +175,9 @@ module.exports = {
           message: 'Wrong email or password combination.'
         });
       }
-      console.log(UserValid);
       
     
       const token = jwt.sign(User, app.get('appSecret'));
-      console.log(token);
-      const bro = jwt.verify(token, app.get('appSecret'), (err, decoded) => {
-            if (err) throw err
-            console.log(res.decoded = decoded);
-            });
-      console.log(bro)
       res.status(200).json({
         status: 'success',
         data: token
